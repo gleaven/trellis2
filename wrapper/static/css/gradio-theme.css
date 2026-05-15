@@ -1,0 +1,390 @@
+/* ── TRELLIS.2 — Gradio Cyberpunk Override ────────────────────────
+ * Injected into the Gradio iframe HTML via the FastAPI proxy.
+ * Overrides Gradio's default dark theme to match the Demo Center
+ * cyberpunk visual language.
+ * ─────────────────────────────────────────────────────────────── */
+
+/* ── Imports ──────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ── Root variable overrides ─────────────────────────────────── */
+:root,
+.dark,
+.gradio-container,
+gradio-app {
+    /* Background */
+    --body-background-fill: #0a0a0f !important;
+    --background-fill-primary: #0d0d14 !important;
+    --background-fill-secondary: #12121a !important;
+    --block-background-fill: #12121a !important;
+    --block-label-background-fill: #15151f !important;
+    --panel-background-fill: #0d0d14 !important;
+    --table-even-background-fill: #0d0d14 !important;
+    --table-odd-background-fill: #12121a !important;
+
+    /* Text */
+    --body-text-color: rgba(255, 255, 255, 0.9) !important;
+    --body-text-color-subdued: rgba(255, 255, 255, 0.5) !important;
+    --block-label-text-color: rgba(255, 255, 255, 0.6) !important;
+    --block-title-text-color: rgba(255, 255, 255, 0.85) !important;
+    --input-text-color: rgba(255, 255, 255, 0.9) !important;
+    --input-placeholder-color: rgba(255, 255, 255, 0.3) !important;
+    --link-text-color: #7B68EE !important;
+    --link-text-color-hover: #9580ff !important;
+    --link-text-color-active: #6a58d6 !important;
+    --link-text-color-visited: #9580ff !important;
+
+    /* Borders */
+    --border-color-primary: rgba(123, 104, 238, 0.2) !important;
+    --border-color-accent: rgba(123, 104, 238, 0.4) !important;
+    --block-border-color: rgba(123, 104, 238, 0.15) !important;
+    --block-label-border-color: rgba(123, 104, 238, 0.15) !important;
+    --input-border-color: rgba(123, 104, 238, 0.2) !important;
+    --input-border-color-focus: rgba(123, 104, 238, 0.5) !important;
+    --table-border-color: rgba(123, 104, 238, 0.1) !important;
+
+    /* Accent */
+    --color-accent: #7B68EE !important;
+    --color-accent-soft: rgba(123, 104, 238, 0.15) !important;
+    --slider-color: #7B68EE !important;
+    --loader-color: #7B68EE !important;
+
+    /* Inputs */
+    --input-background-fill: #15151f !important;
+    --input-background-fill-focus: #1a1a26 !important;
+    --input-shadow-focus: 0 0 0 1px rgba(123, 104, 238, 0.3), 0 0 12px rgba(123, 104, 238, 0.1) !important;
+    --input-radius: 2px !important;
+
+    /* Checkbox/Radio */
+    --checkbox-background-color: #15151f !important;
+    --checkbox-background-color-hover: #1a1a26 !important;
+    --checkbox-background-color-focus: #1a1a26 !important;
+    --checkbox-background-color-selected: #7B68EE !important;
+    --checkbox-border-color: rgba(123, 104, 238, 0.3) !important;
+    --checkbox-border-color-hover: rgba(123, 104, 238, 0.5) !important;
+    --checkbox-border-color-focus: rgba(123, 104, 238, 0.5) !important;
+    --checkbox-border-color-selected: #7B68EE !important;
+
+    /* Shadows */
+    --block-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    --shadow-drop: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    --shadow-drop-lg: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+
+    /* Neutral scale — push toward blue-black */
+    --neutral-50: #f4f4f8 !important;
+    --neutral-100: #e4e4ec !important;
+    --neutral-200: #c8c8d8 !important;
+    --neutral-300: #9898b0 !important;
+    --neutral-400: #6a6a88 !important;
+    --neutral-500: #4a4a68 !important;
+    --neutral-600: #2a2a40 !important;
+    --neutral-700: #1e1e30 !important;
+    --neutral-800: #15151f !important;
+    --neutral-900: #0d0d14 !important;
+    --neutral-950: #0a0a0f !important;
+
+    /* Radius — angular, not rounded */
+    --block-radius: 2px !important;
+    --radius-sm: 1px !important;
+    --radius-md: 2px !important;
+    --radius-lg: 3px !important;
+
+    /* Fonts */
+    --font: 'Rajdhani', 'Source Sans Pro', sans-serif !important;
+    --font-mono: 'Share Tech Mono', monospace !important;
+}
+
+/* ── Page background ─────────────────────────────────────────── */
+html, body {
+    background: #0a0a0f !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+gradio-app {
+    background: #0a0a0f !important;
+}
+
+.gradio-container {
+    background: transparent !important;
+    max-width: 100% !important;
+}
+
+/* ── Primary Buttons ─────────────────────────────────────────── */
+.primary,
+button.primary,
+.gr-button-primary,
+button[variant="primary"],
+.btn-primary {
+    background: linear-gradient(135deg, #7B68EE, #6a58d6) !important;
+    border: 1px solid rgba(123, 104, 238, 0.4) !important;
+    color: #fff !important;
+    box-shadow: 0 0 12px rgba(123, 104, 238, 0.2) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.primary:hover,
+button.primary:hover,
+.gr-button-primary:hover,
+button[variant="primary"]:hover,
+.btn-primary:hover {
+    background: linear-gradient(135deg, #8b7af0, #7B68EE) !important;
+    box-shadow: 0 0 20px rgba(123, 104, 238, 0.35) !important;
+    border-color: rgba(123, 104, 238, 0.6) !important;
+}
+
+/* ── Secondary Buttons ───────────────────────────────────────── */
+.secondary,
+button.secondary,
+button[variant="secondary"] {
+    background: rgba(123, 104, 238, 0.08) !important;
+    border: 1px solid rgba(123, 104, 238, 0.2) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em !important;
+    transition: all 0.2s ease !important;
+}
+
+.secondary:hover,
+button.secondary:hover,
+button[variant="secondary"]:hover {
+    background: rgba(123, 104, 238, 0.15) !important;
+    border-color: rgba(123, 104, 238, 0.4) !important;
+    color: #fff !important;
+}
+
+/* ── Stop/Cancel Buttons ─────────────────────────────────────── */
+.stop,
+button.stop,
+button[variant="stop"] {
+    background: rgba(255, 51, 102, 0.1) !important;
+    border: 1px solid rgba(255, 51, 102, 0.3) !important;
+    color: #ff3366 !important;
+}
+
+.stop:hover,
+button.stop:hover,
+button[variant="stop"]:hover {
+    background: rgba(255, 51, 102, 0.2) !important;
+    border-color: rgba(255, 51, 102, 0.5) !important;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────── */
+.tab-nav,
+.tabs > .tab-nav {
+    border-bottom: 1px solid rgba(123, 104, 238, 0.15) !important;
+    background: transparent !important;
+}
+
+.tab-nav button,
+.tabs > .tab-nav button {
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0.6rem 1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.tab-nav button:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.tab-nav button.selected,
+.tab-nav button[aria-selected="true"] {
+    color: #7B68EE !important;
+    border-bottom: 2px solid #7B68EE !important;
+    background: rgba(123, 104, 238, 0.05) !important;
+}
+
+/* ── Block labels (component headers) ────────────────────────── */
+.block > .wrap > .label-wrap span,
+.block label > span:first-child,
+span[data-testid="block-label"] {
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ── Upload areas ────────────────────────────────────────────── */
+.upload-container,
+[data-testid="upload-button"],
+.image-container .empty-image-preview,
+.center.flex.flex-col {
+    border: 1px dashed rgba(123, 104, 238, 0.3) !important;
+    background: rgba(123, 104, 238, 0.03) !important;
+    transition: all 0.2s ease !important;
+}
+
+.upload-container:hover,
+[data-testid="upload-button"]:hover,
+.image-container .empty-image-preview:hover {
+    border-color: rgba(123, 104, 238, 0.5) !important;
+    background: rgba(123, 104, 238, 0.06) !important;
+}
+
+/* ── Sliders ─────────────────────────────────────────────────── */
+input[type="range"] {
+    accent-color: #7B68EE !important;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background: #7B68EE !important;
+    box-shadow: 0 0 8px rgba(123, 104, 238, 0.4) !important;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: rgba(123, 104, 238, 0.2) !important;
+}
+
+/* ── Dropdown/Select ─────────────────────────────────────────── */
+.wrap > .wrap > .secondary.wrap,
+ul[role="listbox"],
+.dropdown-menu {
+    background: #15151f !important;
+    border: 1px solid rgba(123, 104, 238, 0.2) !important;
+}
+
+ul[role="listbox"] li:hover,
+.dropdown-menu li:hover {
+    background: rgba(123, 104, 238, 0.15) !important;
+}
+
+/* ── Progress / Loading indicators ───────────────────────────── */
+.progress-bar {
+    background: linear-gradient(90deg, #7B68EE, #b388ff) !important;
+}
+
+.generating,
+.eta-bar {
+    border-color: rgba(123, 104, 238, 0.4) !important;
+}
+
+.eta-bar > .progress {
+    background: rgba(123, 104, 238, 0.2) !important;
+}
+
+/* Loading spinner */
+.loading {
+    border-color: rgba(123, 104, 238, 0.2) !important;
+    border-top-color: #7B68EE !important;
+}
+
+/* ── 3D Model Viewer ─────────────────────────────────────────── */
+.model3D,
+.model3D canvas {
+    border: 1px solid rgba(123, 104, 238, 0.15) !important;
+    background: #0a0a0f !important;
+}
+
+/* ── Gallery / Image components ──────────────────────────────── */
+.gallery-item {
+    border: 1px solid rgba(123, 104, 238, 0.1) !important;
+    background: #0d0d14 !important;
+}
+
+.gallery-item:hover,
+.gallery-item.selected {
+    border-color: rgba(123, 104, 238, 0.5) !important;
+    box-shadow: 0 0 12px rgba(123, 104, 238, 0.15) !important;
+}
+
+/* ── Accordion ───────────────────────────────────────────────── */
+.accordion {
+    border: 1px solid rgba(123, 104, 238, 0.15) !important;
+    background: #12121a !important;
+}
+
+.accordion > .label-wrap {
+    font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* ── Markdown content ────────────────────────────────────────── */
+.prose, .markdown-text, .md {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4,
+.markdown-text h1, .markdown-text h2, .markdown-text h3 {
+    font-family: 'Orbitron', sans-serif !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    letter-spacing: 0.05em !important;
+}
+
+.prose code, .markdown-text code {
+    background: rgba(123, 104, 238, 0.1) !important;
+    border: 1px solid rgba(123, 104, 238, 0.15) !important;
+    font-family: 'Share Tech Mono', monospace !important;
+    color: #b388ff !important;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(123, 104, 238, 0.25);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(123, 104, 238, 0.4);
+}
+
+/* ── Hide Gradio footer / branding ───────────────────────────── */
+footer,
+.gradio-container > .main > footer,
+a[href*="gradio.app"],
+.built-with {
+    display: none !important;
+}
+
+/* ── Info/Warning/Error banners ──────────────────────────────── */
+.toast-body.info {
+    background: rgba(123, 104, 238, 0.1) !important;
+    border: 1px solid rgba(123, 104, 238, 0.3) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.toast-body.warning {
+    background: rgba(255, 170, 0, 0.1) !important;
+    border: 1px solid rgba(255, 170, 0, 0.3) !important;
+}
+
+.toast-body.error {
+    background: rgba(255, 51, 102, 0.1) !important;
+    border: 1px solid rgba(255, 51, 102, 0.3) !important;
+}
+
+/* ── Subtle glow on focused elements ─────────────────────────── */
+input:focus, textarea:focus, select:focus,
+.block:focus-within {
+    outline: none !important;
+    box-shadow: 0 0 0 1px rgba(123, 104, 238, 0.3) !important;
+}
+
+/* ── Step markers for the TRELLIS pipeline ───────────────────── */
+.stepper-container .step-button {
+    font-family: 'Share Tech Mono', monospace !important;
+    letter-spacing: 0.08em !important;
+}
+
+.stepper-container .step-button.active,
+.stepper-container .step-button.completed {
+    color: #7B68EE !important;
+}

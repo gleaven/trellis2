@@ -1,0 +1,3 @@
+# BYO override: this demo has no shared dependencies. Override exists for
+# consistency with other demos.
+services: {}

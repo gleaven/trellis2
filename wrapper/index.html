@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TRELLIS.2 // Image to 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/trellis2.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="cyber-bg">
+        <div class="grid-overlay"></div>
+        <div class="scan-line"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="top-bar">
+        <div class="brand">
+            <span class="status-dot" id="status-dot"></span>
+            <span class="logo-text" data-text="TRELLIS.2">TRELLIS.2</span>
+            <span class="status-badge loading" id="status-badge">INITIALIZING</span>
+        </div>
+        <div class="header-right">
+            <span class="header-tag">IMAGE TO 3D</span>
+            <span class="header-tag">4B PARAMS</span>
+            <div class="gpu-bar">
+                <span class="gpu-label"><span class="gpu-pulse"></span>GPU</span>
+                <div class="gpu-track"><div class="gpu-fill" id="gpu-fill"></div></div>
+                <span class="gpu-value" id="gpu-value">0%</span>
+            </div>
+            <button class="stl-btn" id="stl-btn">EXPORT STL</button>
+        </div>
+    </header>
+
+    <!-- Gallery Strip -->
+    <section class="gallery-strip" id="gallery-strip">
+        <div class="gallery-bar" id="gallery-bar">
+            <span class="gallery-label">GALLERY</span>
+            <span class="gallery-count" id="gallery-count">0</span>
+            <span class="gallery-chevron" id="gallery-chevron">&#9660;</span>
+        </div>
+        <div class="gallery-cards" id="gallery-cards">
+            <div class="gallery-empty" id="gallery-empty">Generate a 3D model to start your collection</div>
+        </div>
+    </section>
+
+    <!-- Gradio iframe -->
+    <main class="gradio-container">
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-logo">TRELLIS.2</div>
+            <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+            <div class="loading-text" id="loading-text">Initializing pipeline...</div>
+        </div>
+        <iframe
+            id="gradio-frame"
+            src="gradio/?__theme=dark"
+            allow="clipboard-write"
+            style="display: none;"
+        ></iframe>
+    </main>
+
+    <!-- STL Export Panel -->
+    <aside class="stl-panel" id="stl-panel">
+        <div class="stl-panel-header">
+            <span class="stl-panel-title">STL Export</span>
+            <button class="stl-panel-close" id="stl-panel-close">&times;</button>
+        </div>
+        <div id="stl-stats"></div>
+        <div class="stl-info">
+            STL format contains geometry only. PBR materials, textures, and colors
+            from the GLB source are not included. Scale the model in your slicer
+            as needed for 3D printing.
+        </div>
+        <a class="stl-download-btn" id="stl-download" href="#" download>Download STL</a>
+    </aside>
+
+    <!-- Gallery 3D Viewer Overlay -->
+    <div class="viewer-overlay" id="viewer-overlay">
+        <div class="viewer-bar">
+            <button class="viewer-close" id="viewer-close">&times;</button>
+            <span class="viewer-name" id="viewer-name"></span>
+            <div class="viewer-actions">
+                <button class="viewer-action-btn" id="viewer-stl-btn">EXPORT STL</button>
+                <a class="viewer-action-btn" id="viewer-download-btn" href="#" download>DOWNLOAD GLB</a>
+            </div>
+        </div>
+        <model-viewer
+            id="gallery-viewer"
+            camera-controls
+            auto-rotate
+            shadow-intensity="0.5"
+            environment-image="neutral"
+            style="width: 100%; height: calc(100% - 40px); background: #0a0a0f;"
+        ></model-viewer>
+    </div>
+
+    <script src="static/js/trellis2.js"></script>
+    <script src="/shared/demo-guide.js" data-demo-id="trellis2"></script>
+</body>
+</html>
