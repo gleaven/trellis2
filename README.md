@@ -494,13 +494,64 @@ Not without code changes. The RMBG-2.0 integration lives in
 
 Built by Andrew Meinecke.
 
-The underlying image-to-3D model is **TRELLIS.2** by Microsoft Research
-(<https://github.com/microsoft/TRELLIS.2>), licensed under its own
-terms. Background removal is provided by **RMBG-2.0 / BiRefNet** from
-[briaai](https://huggingface.co/briaai/RMBG-2.0). CUDA extensions
-([`nvdiffrast`](https://github.com/NVlabs/nvdiffrast),
-[`nvdiffrec`](https://github.com/JeffreyXiang/nvdiffrec),
-[`CuMesh`](https://github.com/JeffreyXiang/CuMesh),
-[`FlexGEMM`](https://github.com/JeffreyXiang/FlexGEMM), and `o-voxel`
-from the TRELLIS.2 repo) are compiled from their respective upstreams
-at build time and remain under their original licenses.
+The underlying image-to-3D model is **TRELLIS.2** by Microsoft
+Research. This repo is a Docker wrapper, cyberpunk UI, and STL export
+endpoint around the upstream Gradio app.
+
+## Components & Licensing
+
+This demo (the wrapper code, Dockerfile, themed frontend, GLB→STL
+endpoint, and gallery) is released under Apache License 2.0. It
+bundles the following third-party components, each retaining its own
+license:
+
+**Code (cloned and compiled into the container image):**
+
+| Component | License | Use in this demo |
+|---|---|---|
+| [**Microsoft TRELLIS.2**](https://github.com/microsoft/TRELLIS.2) | MIT | Structured-latent image-to-3D model; the core of the demo |
+| [PyTorch](https://github.com/pytorch/pytorch) 2.9.1 + torchvision | BSD-3 | GPU autodiff |
+| [Gradio](https://github.com/gradio-app/gradio) 6.0.1 | Apache 2.0 | TRELLIS.2's bundled UI (reverse-proxied behind the cyberpunk wrapper) |
+| HuggingFace [`transformers`](https://github.com/huggingface/transformers) (`<5`) | Apache 2.0 | Model loading for TRELLIS.2 and RMBG-2.0 |
+| [`utils3d`](https://github.com/EasternJournalist/utils3d) | MIT | 3D math utilities |
+| [trimesh](https://github.com/mikedh/trimesh) | MIT | GLB → STL conversion (3D print export) |
+| [kornia](https://github.com/kornia/kornia) | Apache 2.0 | Differentiable image ops |
+| [timm](https://github.com/huggingface/pytorch-image-models) | Apache 2.0 | Vision backbones |
+| [lpips](https://github.com/richzhang/PerceptualSimilarity) | BSD-2 | Perceptual loss |
+| [opencv-python-headless](https://github.com/opencv/opencv-python) | Apache 2.0 | Image I/O |
+| [FastAPI](https://github.com/fastapi/fastapi) | MIT | Cyberpunk-wrapper reverse proxy |
+| [Caddy](https://github.com/caddyserver/caddy) (optional `--profile proxy`) | Apache 2.0 | HTTPS termination |
+| [NVIDIA CUDA base image](https://hub.docker.com/r/nvidia/cuda) | NVIDIA Deep Learning Container Software License | GPU runtime |
+
+**CUDA extensions (compiled from source at image build time):**
+
+| Extension | License | Use in this demo |
+|---|---|---|
+| [**nvdiffrast** v0.4.0](https://github.com/NVlabs/nvdiffrast) | **NVIDIA Source Code License** | Differentiable rasterization |
+| [**nvdiffrec** (`renderutils` branch)](https://github.com/JeffreyXiang/nvdiffrec) | **NVIDIA Source Code License** | Differentiable PBR rendering |
+| [CuMesh](https://github.com/JeffreyXiang/CuMesh) | MIT | CUDA-accelerated mesh utilities |
+| [FlexGEMM](https://github.com/JeffreyXiang/FlexGEMM) | MIT | Triton-based sparse convolution |
+| [o-voxel](https://github.com/microsoft/TRELLIS.2/tree/main/o-voxel) (in-tree in TRELLIS.2) | MIT (TRELLIS.2) | Sparse volumetric representation |
+
+**Model weights (downloaded from HuggingFace at runtime, gated by your
+HF token — not redistributed in this repo):**
+
+| Model | License | Use in this demo |
+|---|---|---|
+| [Microsoft TRELLIS.2](https://huggingface.co/microsoft/TRELLIS.2) | per HF model-page terms (accept before download) | Image-to-3D model weights |
+| [**BRIA RMBG-2.0** / BiRefNet](https://huggingface.co/briaai/RMBG-2.0) | **CC BY-NC 4.0** | Background-removal preprocessor |
+
+### License notes
+
+- **nvdiffrast** and **nvdiffrec** are distributed under NVIDIA's
+  Source Code License — research and non-commercial use only. NVIDIA
+  requires a separate agreement for commercial deployment.
+- **BRIA RMBG-2.0** is licensed under **CC BY-NC 4.0** — non-commercial
+  use only. BRIA AI sells a self-hosted commercial license; see
+  <https://huggingface.co/briaai/RMBG-2.0>.
+- The wrapper code in this repo is Apache 2.0, but the **combined
+  container image** inherits the most restrictive licenses among its
+  parts. Treat the built image as research / non-commercial.
+- The NVIDIA CUDA base image is governed by NVIDIA's Deep Learning
+  Container Software License — read it before redistributing the
+  built image.
